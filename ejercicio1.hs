@@ -24,7 +24,14 @@
 --longitud (x:xs) = 1 + longitud (xs)
 --Eso es todo lo que se hasta ahora :c
 --------------------------------------------------------
--- 1) longitud :: [t] -> Integer , que dada una lista devuelve su cantidad de elementos.
+-- 1.1) longitud :: [t] -> Integer , que dada una lista devuelve su cantidad de elementos.
 longitud :: [t]-> Integer
 longitud [] = 0 
 longitud (x:xs) = 1 + longitud(xs)
+
+-- 1.2)
+ultimo :: [t] -> t 
+--según la siguiente especificación:
+ultimo (x:[]) = x
+ultimo (x:xs) |otherwise =  ultimo(xs)
+
