@@ -1,37 +1,44 @@
---Repaso De Cero :
-
--- head : Escoge el primero de la lista y lo devuelve 
---ejemplo si fuera una lista de enteros devolveria el 
---primer entero 
---[1,2,3,4,5] --> 1  
--- tail :Elimina el primero de la lista y devuelve la lista sin ese tipo ejemplo :
---[1,2,3,4,5] --> [2,3,4,5]
-
---lo que significa longitud (x:xs) es la lista -1 ¿Como?
---ejemplo : digamos que tengo una lista [1,2,3,4,5]
---mi x = 1 y mi xs = [2,3,4,5] , digamos como que lo 
---divide 
-
---Tambien puedo hacer cosas locas como separarlo hasta donde yo quiera , en este caso lo separare 2 veces :
---Sea mi lista [3,2,1,2,3]
---(x:y:xs)
---x = 3
---y = 2
---xs = [1,2,3]
-
---longitud :: [t] -> Integer
---longitud [] = 0 
---longitud (x:xs) = 1 + longitud (xs)
---Eso es todo lo que se hasta ahora :c
---------------------------------------------------------
--- 1.1) longitud :: [t] -> Integer , que dada una lista devuelve su cantidad de elementos.
-longitud :: [t]-> Integer
+--Somos lo que somos 
+--1.1)Longitud :: [t] -> t , segun la siguiente 
+--especificacion :
+longitud :: [t] -> Integer
 longitud [] = 0 
-longitud (x:xs) = 1 + longitud(xs)
+longitud (x:xs) = 1 + longitud(xs)    
+--o 
+longitud2 :: [t] -> Integer
+longitud2 (x:[]) = 1 
+longitud2 (x:xs) =1 + longitud2(xs)    
 
--- 1.2)
-ultimo :: [t] -> t 
---según la siguiente especificación:
-ultimo (x:[]) = x
-ultimo (x:xs) |otherwise =  ultimo(xs)
+--2. ultimo :: [t] -> t segun la siguiente 
+--especificacion:
+--Devuelveme el ultimo elemento de la secuencia
+ultimo :: [t] -> t
+ultimo (x:[]) = x 
+ultimo (x:xs) = ultimo (xs) 
+
+--3. principio :: [t] -> [t]
+-- segun la siguiente especificacion:
+-- resultado = subseq(s, 0, |s| - 1) 
+--subseq(s, 0, |s| - 1) = ME DEVUELVE UNA SECUNCIA SACANDOME UN ELEMNTO DE INDICE |S|-1 
+--EMPEZANDO POR 0 , RECORDAR QUE LA SECUENCIA EMPIEZA POR 0 ,1,2,3,4
+--ejemplo "HOLA" -> "HOL"
+principio :: [t] -> [t]
+principio (x:[]) = []
+principio (x:xs) = x:principio(xs) 
+-- O
+principio2 :: [t] -> [t]
+principio2 [x] = []
+principio2 (x:xs) = x : principio2 xs
+
+--reverso :: [t] -> [t] segun la siguiente especificacion:
+
+--problema reverso (s: seq⟨T⟩) : seq⟨T⟩
+-- resultado tiene los mismos elementos que s 
+--pero en orden inverso.
+--ejemplo : "HOLA" --> "ALOH"
+reverso :: [t] -> [t]
+reverso (x:[]) =[x]
+reverso  (x:xs) = reverso(xs) ++ [x]
+
+
 
