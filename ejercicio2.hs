@@ -1,3 +1,5 @@
+--2.1 )
+
 --pertenece :: (Eq t) => t -> [t] -> Bool segun 
 --la siguiente especificacion:
 --Eq es el conjunto de tipos de datps a los que se le puede aplicar {Bool Int Integer Float Double ...}
