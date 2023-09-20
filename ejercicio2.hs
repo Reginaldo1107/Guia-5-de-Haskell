@@ -34,27 +34,67 @@ todosIguales (x:xs) = (x == head xs)  && todosIguales (xs)
 
 -------------------------------------------------------------------------
 --2.3
+--3. todosDistintos :: (Eq t) => [t] -> Bool 
+--segun la siguiente especicacion:
+--problema todosDistintos (s: seq⟨T⟩) : B 
+--requiere:{True}
+--asegura:{resultado = false ↔ existen dos posiciones distintas de s con igual valor }0
+--Si devuelve true es porque son ditintos 
+--si devuelve false es porque el elemento es igual al de la lista
+verificarQueSeanDistintos :: (Eq t) => t -> [t] -> Bool
+verificarQueSeanDistintos x [] = True
+verificarQueSeanDistintos x  (y:ys) |x == y  = False
+                                    | otherwise = verificarQueSeanDistintos x (ys)
+
+todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos [] = True
+todosDistintos [x] = True
+todosDistintos (x:xs) | verificarQueSeanDistintos x xs == False  = False
+                      |otherwise = todosDistintos (xs)
+
+---------------------------------------------------------------------
+--2.4 ) 4. hayRepetidos :: (Eq t) => [t] -> Bool seg´un la siguiente especicaci´on:
+--problema hayRepetidos (s: seq⟨T⟩) : B {
+--requiere: { True }
+--asegura: { resultado = true ↔ existen dos posiciones distintas de s con igual valor }
+--}
+verificarQueSeanIguales :: (Eq t) => t -> [t] -> Bool
+verificarQueSeanIguales x [] = False
+verificarQueSeanIguales x  (y:ys) |x == y  = True
+                                    | otherwise = verificarQueSeanIguales x (ys)
+
+hayRepetidos :: (Eq t) => [t] -> Bool
+hayRepetidos [] = False
+hayRepetidos [x] = False
+hayRepetidos (x:xs) | verificarQueSeanIguales x xs == True  = True
+                      |otherwise = hayRepetidos (xs)
+
+----------------------------------------------------------------------------------
+--5. quitar :: (Eq t) => t -> [t] -> [t], 
+--que dados un entero x y una lista xs, 
+--elimina la primera aparicion de x en
+--la lista xs (de haberla).
+recorrerLaLista :: (Eq t) => [t]->[t]
+recorrerLaLista[] = []
+recorrerLaLista (x:[]) = [x]
+recorrerLaLista (x:xs) = x:recorrerLaLista(xs)
+
+quitar :: (Eq t) => t -> [t] -> [t]
+quitar x [] = []
+quitar x [y] |x==y = []
+             |otherwise = [y]
+quitar x (y:ys) | x == y = recorrerLaLista(ys)
+                |otherwise = y:(quitar x (ys))             
 
 
+--o
 
+quitar2 :: (Eq t) => t -> [t] -> [t]
+quitar2 _ [] = []
+quitar2 x (y:xs) | x == y = xs
+                | otherwise = y : quitar2 x xs
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--Quiero entrar buscando de a uno x:(xs)
 
 
 
